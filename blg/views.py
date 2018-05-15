@@ -1,6 +1,6 @@
 from django.http import HttpResponse, Http404
 from django.shortcuts import render
-from .models import Topic
+from .models import Topic, Author
 
 def home(request):
     topic = Topic.objects.all()
@@ -9,7 +9,10 @@ def home(request):
 def blog_edu(request, topic):
     try:
         topic = Topic.objects.get(topic_name = topic)
-        context = {'topic':topic}
+        author = Author.objects.get(name=topic.author)
+        context = {'topic':topic,
+                    'author':author
+                    }
         return render(request, 'blog_page.html', context)
     except:
         return render(request, 'pageNotFound.html')
