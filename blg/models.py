@@ -20,6 +20,7 @@ class Topic(models.Model):
     algorithm_type = models.CharField(max_length=50, default='None')
     upload_date = models.CharField(max_length=50, default='None')
     github = models.CharField(max_length=200, default='None')
+    content = models.TextField(max_length=3000, default='None')
     
 
     def __str__(self):

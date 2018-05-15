@@ -31,7 +31,12 @@
    <!-- favicons
 	================================================== -->
 	<link rel="shortcut icon" href="{% static "favicon.ico" %}" type="image/x-icon">
-	<link rel="icon" href="{% static "favicon.ico" %}" type="image/x-icon">
+    <link rel="icon" href="{% static "favicon.ico" %}" type="image/x-icon">
+    
+    <!--for maths-->
+    <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML" async>
+</script>
 
 </head>
 
@@ -105,51 +110,10 @@
 						<ul class="entry-meta">
 							<li class="date">{{topic.upload_date}}</li>						
 							<li class="cat"><a href="{{topic.github}}">{{topic.github}}</a></li>				
-						</ul>						
-
-						<p class="lead">This is low contrast content</p> 
-
-						<p>This is content</p>
-
-						<p><img src="images/shutterbug.jpg" alt=""></p>
-
-						<h2>Large Heading</h2>
-
-						<p>This another content</p>
-						<blockquote><p>This for qutes</p></blockquote>
-
-						<p>This is more content</p>
-
-						<h3>Smaller Heading</h3>
-
-						<p>content</p>
-
-						<p>content.</p>
-
-<pre><code>
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-plt.rcParams['figure.figsize'] = 12, 8
-%matplotlib inline
-</code></pre>
-
-						<p>Some points.</p>
-
-						<ul>
-							<li>superpoint
-								<ul>
-									<li>point1.</li>
-									<li>point2.</li>
-									<li>point3</li>
-								</ul>
-							</li>
-							<li>superpoint</li>
-							<li>superpoint</li>
-						</ul>
-
-						<p>..more content</p>
-
+                        </ul>
+                        {% autoescape off %}
+                        {{ topic.content }}
+                        {% endautoescape %}
 						<p class="tags">
 		  			     	<span>Tagged in :</span>
 		  				  	<a href="#">orci</a><a href="#">lectus</a><a href="#">varius</a><a href="#">turpis</a>
