@@ -25,3 +25,13 @@ class Topic(models.Model):
 
     def __str__(self):
         return self.topic_name
+
+class Comment(models.Model):
+    cmt = models.TextField(max_length=300)
+    writer_name = models.CharField(max_length=100)
+    time = models.CharField(max_length=100)
+    email = models.CharField(max_length=100)
+    topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.writer_name;
