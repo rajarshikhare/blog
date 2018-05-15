@@ -46,17 +46,17 @@
    	<div class="row header-content">
 
    		<div class="logo">
-	         <a href="index.html">Author</a>
+	         <a href="{% url 'blg:home' %}">Author</a>
 	      </div>
 
 	   	<nav id="main-nav-wrap">
 				<ul class="main-navigation sf-menu">
-					<li class="current"><a href="index.html" title="">Home</a></li>									
+					<li class="current"><a href="{% url 'blg:home' %}" title="">Home</a></li>									
 					<li class="has-children">
 						<a href="single-standard" title="">Blog</a>
 					</li>
-					<li><a href="about.html" title="">About</a></li>	
-					<li><a href="contact.html" title="">Contact</a></li>										
+					<li><a href="{% url 'blg:about' %}" title="">About</a></li>	
+					<li><a href="{% url 'blg:contact' %}" title="">Contact</a></li>										
 				</ul>
 			</nav> <!-- end main-nav-wrap -->
 
@@ -113,7 +113,7 @@
 												<li><a href="#" >Naruto Uzumaki</a></li>				
 											</ul>	
 
-								   		<h1 class="slide-title"><a href="single-standard" title="">{{tpc.topic_name}}</a></h1> 
+								   		<h1 class="slide-title"><a href="{% url 'blg:blog' topic=tpc.topic_name  %}" title="">{{tpc.topic_name}}</a></h1> 
 								   	</div> 				   					  
 				   			
 				   				</div>
@@ -140,12 +140,11 @@
 
                		<div class="entry-meta">
                			<span class="cat-links">
-               				<a href="#">Design</a> 
-               				<a href="#">Photography</a>               				
+               				<a href="#">Supervised Learning</a>              				
                			</span>			
                		</div>
 
-               		<h1 class="entry-title"><a href="home/{{tpc.topic_name}}">{{tpc.topic_name}}</a></h1>
+               		<h1 class="entry-title"><a href="{% url 'blg:blog' topic=tpc.topic_name %}">{{tpc.topic_name}}</a></h1>
                		
                	</div>
 						<div class="entry-excerpt">
@@ -195,8 +194,8 @@
 	            <h4>About Our Site</h4>
 
 	               <p>
-		          	Lorem ipsum Ut velit dolor Ut labore id fugiat in ut fugiat nostrud qui in dolore commodo eu magna Duis cillum dolor officia esse mollit proident Excepteur exercitation nulla. Lorem ipsum In reprehenderit commodo aliqua irure labore.
-		          	</p>
+                      This site is made by me to
+                    </p>
 
 		      </div> <!-- end footer-info -->
 
@@ -205,11 +204,8 @@
 	      		<h4>Site Links</h4>
 
 	      		<ul>
-	      			<li><a href="#">About Us</a></li>
+	      			<li><a href="{% url 'blg:about' %}">About Me</a></li>
 						<li><a href="#">Blog</a></li>
-						<li><a href="#">FAQ</a></li>
-						<li><a href="#">Terms</a></li>
-						<li><a href="#">Privacy Policy</a></li>
 					</ul>
 
 	      	</div> <!-- end site-links -->  
@@ -219,15 +215,13 @@
 	      		<h4>Social</h4>
 
 	      		<ul>
-	      			<li><a href="#">Twitter</a></li>
-						<li><a href="#">Facebook</a></li>
-						<li><a href="#">Dribbble</a></li>
-						<li><a href="#">Google+</a></li>
-						<li><a href="#">Instagram</a></li>
+	      			<li><a href="https://twitter.com/Rajarshivaibhav">Twitter</a></li>
+						<li><a href="https://www.facebook.com/rajarshiv">Facebook</a></li>
+						<li><a href="https://www.instagram.com/kharerajarshi/">Instagram</a></li>
 					</ul>
 	      	           	
 	      	</div> <!-- end social links --> 
-
+              <!--
 	      	<div class="col-four tab-1-3 mob-full footer-subscribe">
 
 	      		<h4>Subscribe</h4>
@@ -248,7 +242,7 @@
 
 	      		</div>	      		
 	      	           	
-	      	</div> <!-- end subscribe -->         
+              </div> <!-- end subscribe -->        
 
 	      </div> <!-- end row -->
 
