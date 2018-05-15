@@ -53,16 +53,10 @@
 				<ul class="main-navigation sf-menu">
 					<li><a href="{% url 'blg:home' %}" title="">Home</a></li>									
 					<li class="has-children current">
-						<a href="single-standard.html" title="">Blog</a>
-						<ul class="sub-menu">
-			            <li><a href="single-video.html">Video Post</a></li>
-			            <li><a href="single-audio.html">Audio Post</a></li>
-			            <li><a href="single-gallery.html">Gallery Post</a></li>
-			            <li><a href="single-standard.html">Standard Post</a></li>
-			         </ul>
+						<a href="{% url 'blg:blog' %}l" title="">Blog</a>
 					</li>
 					<li><a href="{% url 'blg:about' %}" title="">About</a></li>	
-					<li><a href="contact.html" title="">Contact</a></li>										
+					<li><a href="{% url 'blg:contact' %}" title="">Contact</a></li>										
 				</ul>
 			</nav> <!-- end main-nav-wrap -->
 
