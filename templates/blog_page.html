@@ -103,7 +103,7 @@
 						<h1 class="page-title">{{topic.topic_name}}</h1>	
 
 						<ul class="entry-meta">
-							<li class="date">September 06, 2016</li>						
+							<li class="date">{{topic.upload_date}}</li>						
 							<li class="cat"><a href="">Wordpress</a><a href="">Design</a></li>				
 						</ul>						
 
@@ -395,7 +395,7 @@ plt.rcParams['figure.figsize'] = 12, 8
              <h4>About Our Site</h4>
 
                 <p>
-                   This site is made by me to
+                    {{footer.about}}
                  </p>
 
            </div> <!-- end footer-info -->
@@ -416,9 +416,9 @@ plt.rcParams['figure.figsize'] = 12, 8
                <h4>Social</h4>
 
                <ul>
-                   <li><a href="https://twitter.com/Rajarshivaibhav">Twitter</a></li>
-                     <li><a href="https://www.facebook.com/rajarshiv">Facebook</a></li>
-                     <li><a href="https://www.instagram.com/kharerajarshi/">Instagram</a></li>
+                   <li><a href="{{footer.twitter}}">Twitter</a></li>
+                     <li><a href="{{footer.facebook}}">Facebook</a></li>
+                     <li><a href="{{footer.instagram}}">Instagram</a></li>
                  </ul>
                           
            </div> <!-- end social links --> 

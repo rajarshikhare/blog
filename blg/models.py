@@ -13,12 +13,12 @@ class Author(models.Model):
         return self.name
 
 class Topic(models.Model):
-    #author = models.ForeignKey(Author, on_delete=models.CASCADE)
     author = models.CharField(max_length=200, default='None')
     topic_name = models.CharField(max_length=200)
     abstract_img = models.CharField(max_length=200, default='None')
     abstract = models.CharField(max_length=1000, default='None')
     algorithm_type = models.CharField(max_length=50, default='None')
+    upload_date = models.CharField(max_length=50, default='None')
     
 
     def __str__(self):
