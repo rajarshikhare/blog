@@ -19,6 +19,7 @@ class Topic(models.Model):
     abstract = models.CharField(max_length=1000, default='None')
     algorithm_type = models.CharField(max_length=50, default='None')
     upload_date = models.CharField(max_length=50, default='None')
+    github = models.CharField(max_length=200, default='None')
     
 
     def __str__(self):
