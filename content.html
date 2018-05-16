@@ -1,8 +1,8 @@
-    <p class="lead">Basic Undertanding</p> 
-    <p>There are centain attributes that we see in your day to day life which are dependent on some other other actions. The nature of these actions combined togethor decided the nature of the dependent observation. So as you can guess, its quite obvious that we can predict any outcome given, we know these features.</p>
+    <p class="lead">Basic Understanding</p> 
+    <p>There are certain attributes that we see in your day to day life which are dependent on some other other actions. The nature of these actions combined together decided the nature of the dependent observation. So as you can guess, it's quite obvious that we can predict any outcome given, we know these feature.</p>
     <h2>Linear regression</h2>
-    <p>As discussed above a set of features can be used to calulate a particular outcome. In linear regression we use linear combination of these features to comeout with a prediction, here we require a linear function which excepts these features and output's the prediction. To calulate the most accurate linear function we need an already observed data so as to calculate the error and minimize it.</p>
-    <p>Assusme we have a feature X, The predict can be given by: </br>$$Y = a*X + b$$</br>
+    <p>As discussed above, a set of features can be used to calculate a particular outcome. In linear regression we use a linear combination of these features to come out with a prediction, here we require a linear function which excepts these features and output's the prediction. To calculate the most accurate linear function we need an already observed data so as to calculate and minimize error.</p>
+    <p>Assusme we have a feature X, The predict can be given by: </br>$$Y = \theta_1*X + \theta_0$$</br>
     $$error = Y - Y_{actual}$$</p>
     <p>To find best linear function we will be using multiple observations to calculate the error. We will use a cost function that will some up all the error in the observations and minimizing this cost function will fetch us the best linear fit for our given obseravtions</p>
     <p>$$ cost = \frac{\sum_{i=0}^n error^2}{n}$$</p>
@@ -24,17 +24,22 @@
         </ul>
     </p>
     <h4>Gradient Descent</h4>
+    <p>Here for every iteration theta will updated in the direction where the cost function decreases. To get the direction where cost is drecreasing we need to find the gradient of theta.</br>
+    $$ gradient = \frac{\sum_{i=0}^n error*X}{n} $$</p>
+    <P>$$ \theta_{new} = \theta_{old} - \alpha * gradient $$
+        here alpha is called learning rate of gradient descent algorithm.It specifies the rate at which the theta values are updated.
+    </P>
     <pre>
         <code>
         def gradientDescent(X, y, theta, iter_no, alpha):
-        X = np.matrix(X)
-        y = (np.matrix(y))
-        theta = (np.matrix(theta)).T
-        cost = list([])
-        for i in range(1, iter_no):
-            theta = theta - (alpha/len(X)) * np.multiply((X * theta - y.T), X).sum(axis = 0).T
-            cost.append(costFunction(theta.T, X, y))
-        return theta, cost
+            X = np.matrix(X)
+            y = (np.matrix(y))
+            theta = (np.matrix(theta)).T
+            cost = list([])
+            for i in range(1, iter_no):
+                theta = theta - (alpha/len(X)) * np.multiply((X * theta - y.T), X).sum(axis = 0).T
+                cost.append(costFunction(theta.T, X, y))
+            return theta, cost
         </code>
     </pre>
     <h4>Normal Equation (Computationaly expensive)</h4>
@@ -45,4 +50,5 @@
         theta_n = np.linalg.inv(X_n.T*X_n)*X_n.T*y_n
         </code>
     </pre>
-    <p>Some times our data doesnt fit in a linear function, in that case we can use the exponential value of our features to get a non-linear curve which fits better, this is called polynomial regression .</p>
+    <p>The resultant thetas are used to make prediction given a new feature, with the formula given above.</p>
+    <p>Some times our data does'nt fit in a linear function, in that case we can use the exponential value of our features to get a non-linear curve which fits better, this is called polynomial regression .</p>
