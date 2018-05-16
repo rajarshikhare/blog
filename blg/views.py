@@ -13,8 +13,6 @@ footer = {
 }
 
 def home(request):
-    client_address = request.META['REMOTE_ADDR']  
-    print(client_address)
     store_req(request)
     topic = Topic.objects.all()
     context = {

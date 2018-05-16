@@ -40,6 +40,7 @@ class Comment(models.Model):
 class Client(models.Model):
     user_agent = models.CharField(max_length=1000)
     ip_address = models.CharField(max_length=20)
+    time = models.CharField(max_length=100)
 
     def __str__(self):
         return self.ip_address
