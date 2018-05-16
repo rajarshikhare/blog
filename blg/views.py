@@ -1,23 +1,20 @@
 from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect
-from .models import Topic, Author, Comment
+from .models import Topic, Author, Comment, WebsiteDetail
 import time
 from .client import store_req
-
-footer = {
-    'about':'This site contains few concepts that I have learned throughout my 3 years of b-tech journey. Most of the articles here will be on machine learning and data strucures.',
-    'twitter':'https://twitter.com/Rajarshivaibhav',
-    'facebook':'https://www.facebook.com/rajarshiv',
-    'instagram':'https://www.instagram.com/kharerajarshi/'
-
-}
 
 def home(request):
     store_req(request)
     topic = Topic.objects.all()
+    footer = WebsiteDetail.objects.get(id=1)
+    pages = list(range(1, topic.count()//5 + 2))
+    current_page = 1
     context = {
         'topic':topic,
-        'footer':footer
+        'footer':footer,
+        'pages':pages,
+        'current_page':current_page
     }
     return render(request, 'index.html', context)
 
@@ -37,6 +34,8 @@ def blog_edu(request, topic):
     else:
         prev_ = 'Start....'
 
+    footer = WebsiteDetail.objects.get(id=1)
+
     context = {'topic':topic,
                 'author':author,
                 'footer':footer,
@@ -49,6 +48,7 @@ def blog_edu(request, topic):
 
 
 def about(request):
+    footer = WebsiteDetail.objects.get(id=1)
     context = {
         'footer':footer
     }
@@ -56,12 +56,14 @@ def about(request):
 
 
 def contact(request):
+    footer = WebsiteDetail.objects.get(id=1)
     context = {
         'footer':footer
     }
     return render(request, 'contact.html', context)
 
 def blog(request):
+    footer = WebsiteDetail.objects.get(id=1)
     return render(request, 'pageNotFound.html')
 
 def comment(request):

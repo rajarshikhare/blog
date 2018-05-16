@@ -41,6 +41,19 @@ class Client(models.Model):
     user_agent = models.CharField(max_length=1000)
     ip_address = models.CharField(max_length=20)
     time = models.CharField(max_length=100)
+    city = models.CharField(max_length=100, default='None')
+    country = models.CharField(max_length=100, default='None')
+    isp = models.CharField(max_length=100, default='None')
 
     def __str__(self):
-        return self.ip_address
+        return self.city + ' - ' + self.country
+
+
+class WebsiteDetail(models.Model):
+    about = models.TextField(max_length=500)
+    twitter = models.CharField(max_length=100)
+    facebook = models.CharField(max_length=100)
+    instagram = models.CharField(max_length=100)
+
+    def __self__(self):
+        return self.about
