@@ -19,12 +19,12 @@ def store_req(request):
     c.save()
 
 def get_location(ip):
-    url = 'http://ip-api.com/json/'
+    url = 'https://api.ipdata.co/'
     url = url + str(ip)
     response = requests.get(url)
-    data = json.loads(response.content)
-    if data['status'] == 'success':
-        return [data['city'], data['country'], data['isp']]
+    if response.status_code == 200:
+        data = json.loads(response.content)
+        return [data['city'], data['country_name'], data['organisation']]
     else:
         return ['Nan', 'Nan', 'Nan']
         
