@@ -1,6 +1,7 @@
 from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect
 from .models import Topic, Author, Comment
+import time
 
 footer = {
     'about':'This site contains few concepts that i have learnt throughtout my 4 years of b-tech jounrney. Most of the articles here will be on machine learning.',
@@ -23,10 +24,22 @@ def blog_edu(request, topic):
     topic = Topic.objects.get(topic_name=topic)
     author = Author.objects.get(name=topic.author)
     comment = Comment.objects.filter(topic=topic)
+    next_ = topic.id + 1
+    prev_ = topic.id - 1
+    if next_ <= Topic.objects.all().count():
+        next_ = Topic.objects.get(id=next_).topic_name
+    else:
+        next_ = 'Not Available'
+    if prev_ > 0:
+        prev_ = Topic.objects.get(id=prev_).topic_name
+    else:
+        prev_ = 'Not Available'
+
     context = {'topic':topic,
                 'author':author,
                 'footer':footer,
-                'comment':comment
+                'comment':comment,
+                'nav':{'next':next_, 'prev':prev_}
                 }
     return render(request, 'blog_page.html', context)
     #except:
@@ -50,7 +63,6 @@ def blog(request):
     return render(request, 'pageNotFound.html')
 
 def comment(request):
-    cmt = Comment(cmt=request.POST['cMessage'], writer_name=request.POST['cName'], time="time_pass", email=request.POST['cEmail'], topic=Topic.objects.get(topic_name=request.POST['topic']))
+    cmt = Comment(cmt=request.POST['cMessage'], writer_name=request.POST['cName'], time=time.ctime(), email=request.POST['cEmail'], topic=Topic.objects.get(topic_name=request.POST['topic']))
     cmt.save()
-    print(request.POST['cName'])
     return redirect('/home/' + request.POST['topic'])
