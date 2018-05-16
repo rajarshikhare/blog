@@ -38,7 +38,7 @@ class Comment(models.Model):
         return self.writer_name
 
 class Client(models.Model):
-    user_agent = models.CharField(max_length=100)
+    user_agent = models.CharField(max_length=1000)
     ip_address = models.CharField(max_length=20)
 
     def __str__(self):
