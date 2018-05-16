@@ -1,4 +1,6 @@
 from .models import Client
+import requests
+import json
 import time
 
 
@@ -12,5 +14,17 @@ def get_client_ip(request):
 
 def store_req(request):
     ip_addr = get_client_ip(request)
-    c = Client(user_agent=request.META['HTTP_USER_AGENT'], ip_address=ip_addr, time=time.ctime())
+    city, country, isp = get_location('174.65.14.63')
+    c = Client(user_agent=request.META['HTTP_USER_AGENT'], ip_address=ip_addr, time=time.ctime(), city=city, country=country, isp=isp)
     c.save()
+
+def get_location(ip):
+    url = 'http://ip-api.com/json/'
+    url = url + str(ip)
+    response = requests.get(url)
+    data = json.loads(response.content)
+    if data['status'] == 'success':
+        return [data['city'], data['country'], data['isp']]
+    else:
+        return ['Nan', 'Nan', 'Nan']
+        
