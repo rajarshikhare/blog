@@ -33,11 +33,6 @@
 	<link rel="shortcut icon" href="{% static "favicon.ico" %}" type="image/x-icon">
     <link rel="icon" href="{% static "favicon.ico" %}" type="image/x-icon">
     
-    <!--for maths-->
-    <script type="text/javascript" async
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML" async>
-</script>
-
 </head>
 
 <body id="top">
@@ -114,10 +109,10 @@
                         {% autoescape off %}
                         {{ topic.content }}
                         {% endautoescape %}
-						<p class="tags">
+						<!--<p class="tags">
 		  			     	<span>Tagged in :</span>
 		  				  	<a href="#">orci</a><a href="#">lectus</a><a href="#">varius</a><a href="#">turpis</a>
-		  			   </p>
+		  			   </p>-->
 
 		  			   <div class="author-profile">
 		  			   	<img src="{{author.img_url}}" alt="">
@@ -139,15 +134,15 @@
 
 	  			   <div class="pagenav group">
 		  			   <div class="prev-nav">
-		  			   	<a href="#" rel="prev">
+		  			   	<a href="{% url 'blg:blog_edu' topic=nav.prev %}" rel="prev">
 		  			   		<span>Previous</span>
-		  			   		Tips on Minimalist Design 
+		  			   		{{nav.prev}} 
 		  			   	</a>
 		  			   </div>
 		  				<div class="next-nav">
-		  					<a href="#" rel="next">
+		  					<a href="{% url 'blg:blog_edu' topic=nav.next %}" rel="next">
 		  						<span>Next</span>
-		  			   		Less Is More 
+		  			   		{{nav.next}} 
 		  					</a>
 		  				</div>  				   
 	  				</div>
@@ -172,7 +167,7 @@
                   <li class="depth-1">
 
                      <div class="avatar">
-                        <img width="50" height="50" class="avatar" src="images/avatars/user-01.jpg" alt="">
+                        <img width="50" height="50" class="avatar" src="https://pikmail.herokuapp.com/{{cmt.email}}" alt="">
                      </div>
 
                      <div class="comment-content">
@@ -212,10 +207,6 @@
 
                      <div class="form-field">
   						      <input name="cEmail" type="text" id="cEmail" class="full-width" placeholder="Your Email" value="">
-                     </div>
-
-                     <div class="form-field">
-  						      <input name="cWebsite" type="text" id="cWebsite" class="full-width" placeholder="Website"  value="">
                      </div>
 
                      <input type="hidden" name=topic value="{{topic.topic_name}}"> 
@@ -333,7 +324,9 @@
    <script src="{% static "js/jquery-2.1.3.min.js" %}"></script>
    <script src="{% static "js/plugins.js" %}"></script>
    <script src="{% static "js/main.js" %}"></script>
-
+   <script type="text/javascript" async
+   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML" async>
+    </script>
 </body>
 
 </html>
