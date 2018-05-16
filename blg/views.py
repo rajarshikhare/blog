@@ -2,6 +2,7 @@ from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect
 from .models import Topic, Author, Comment
 import time
+from .client import store_req
 
 footer = {
     'about':'This site contains few concepts that I have learned throughout my 3 years of b-tech journey. Most of the articles here will be on machine learning and data strucures.',
@@ -12,6 +13,9 @@ footer = {
 }
 
 def home(request):
+    client_address = request.META['REMOTE_ADDR']  
+    print(client_address)
+    store_req(request)
     topic = Topic.objects.all()
     context = {
         'topic':topic,

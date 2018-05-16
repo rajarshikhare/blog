@@ -35,4 +35,11 @@ class Comment(models.Model):
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.writer_name;
+        return self.writer_name
+
+class Client(models.Model):
+    user_agent = models.CharField(max_length=100)
+    ip_address = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.ip_address
