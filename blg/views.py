@@ -4,7 +4,7 @@ from .models import Topic, Author, Comment
 import time
 
 footer = {
-    'about':'This site contains few concepts that i have learnt throughtout my 4 years of b-tech jounrney. Most of the articles here will be on machine learning.',
+    'about':'This site contains few concepts that I have learned throughout my 3 years of b-tech journey. Most of the articles here will be on machine learning and data strucures.',
     'twitter':'https://twitter.com/Rajarshivaibhav',
     'facebook':'https://www.facebook.com/rajarshiv',
     'instagram':'https://www.instagram.com/kharerajarshi/'
@@ -29,11 +29,11 @@ def blog_edu(request, topic):
     if next_ <= Topic.objects.all().count():
         next_ = Topic.objects.get(id=next_).topic_name
     else:
-        next_ = 'Not Available'
+        next_ = '....End'
     if prev_ > 0:
         prev_ = Topic.objects.get(id=prev_).topic_name
     else:
-        prev_ = 'Not Available'
+        prev_ = 'Start....'
 
     context = {'topic':topic,
                 'author':author,
