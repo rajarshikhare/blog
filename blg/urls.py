@@ -10,5 +10,7 @@ urlpatterns = [
     path('/contact', views.contact, name='contact'),
     path('/<topic>/', views.blog_edu, name='blog_edu'),
     path('/blog' ,views.blog, name='blog'),
-    path('/comment', views.comment, name='comment')
+    path('/comment', views.comment, name='comment'),
+    path('/create_blog/<topic>', views.create_blog, name='create_blog'),
+    path('/add_blog', views.add_blog, name='add_blog')
 ]

@@ -8,7 +8,7 @@
    <!--- basic page needs
    ================================================== -->
    <meta charset="utf-8">
-	<title>Contact Page - Abstract</title>
+	<title>Contact Page</title>
 	<meta name="description" content="">  
 	<meta name="author" content="">
 
@@ -52,8 +52,11 @@
              <ul class="main-navigation sf-menu">
                  <li><a href="{% url 'blg:home' %}" title="">Home</a></li>									
                  <li class="has-children">
-                     <a href="{% url 'blg:blog' %}" title="">Blog</a>
-                 </li>
+                        <a href="#" title="">Blog</a>
+                        <ul class="sub menu" style="display: none;">
+                            <li><a href="{% url 'blg:create_blog' topic="new blog" %}">Create new Blog</a></li>
+                        </ul>
+					</li>
                  <li><a href="{% url 'blg:about' %}" title="">About</a></li>	
                  <li class="current"><a href="{% url 'blg:contact' %}" title="">Contact</a></li>										
              </ul>

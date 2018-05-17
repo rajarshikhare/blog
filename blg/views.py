@@ -4,6 +4,7 @@ from .models import Topic, Author, Comment, WebsiteDetail
 import time
 from .client import store_req
 
+
 def home(request):
     store_req(request)
     topic = Topic.objects.all()
@@ -11,15 +12,16 @@ def home(request):
     pages = list(range(1, topic.count()//5 + 2))
     current_page = 1
     context = {
-        'topic':topic,
-        'footer':footer,
-        'pages':pages,
-        'current_page':current_page
+        'topic': topic,
+        'footer': footer,
+        'pages': pages,
+        'current_page': current_page
     }
     return render(request, 'index.html', context)
 
+
 def blog_edu(request, topic):
-    #try:
+    # try:
     topic = Topic.objects.get(topic_name=topic)
     author = Author.objects.get(name=topic.author)
     comment = Comment.objects.filter(topic=topic)
@@ -28,29 +30,29 @@ def blog_edu(request, topic):
     if next_ <= Topic.objects.all().count():
         next_ = Topic.objects.get(id=next_).topic_name
     else:
-        next_ = '....End'
+        next_ = Topic.objects.get(id=1).topic_name
     if prev_ > 0:
         prev_ = Topic.objects.get(id=prev_).topic_name
     else:
-        prev_ = 'Start....'
+        prev_ = Topic.objects.get(id=Topic.objects.all().count()).topic_name
 
     footer = WebsiteDetail.objects.get(id=1)
 
-    context = {'topic':topic,
-                'author':author,
-                'footer':footer,
-                'comment':comment,
-                'nav':{'next':next_, 'prev':prev_}
-                }
+    context = {'topic': topic,
+               'author': author,
+               'footer': footer,
+               'comment': comment,
+               'nav': {'next': next_, 'prev': prev_}
+               }
     return render(request, 'blog_page.html', context)
-    #except:
+    # except:
     #    return render(request, 'pageNotFound.html')
 
 
 def about(request):
     footer = WebsiteDetail.objects.get(id=1)
     context = {
-        'footer':footer
+        'footer': footer
     }
     return render(request, 'about.html', context)
 
@@ -58,15 +60,49 @@ def about(request):
 def contact(request):
     footer = WebsiteDetail.objects.get(id=1)
     context = {
-        'footer':footer
+        'footer': footer
     }
     return render(request, 'contact.html', context)
+
 
 def blog(request):
     footer = WebsiteDetail.objects.get(id=1)
     return render(request, 'pageNotFound.html')
 
+
 def comment(request):
-    cmt = Comment(cmt=request.POST['cMessage'], writer_name=request.POST['cName'], time=time.ctime(), email=request.POST['cEmail'], topic=Topic.objects.get(topic_name=request.POST['topic']))
+    cmt = Comment(cmt=request.POST['cMessage'], writer_name=request.POST['cName'], time=time.ctime(
+    ), email=request.POST['cEmail'], topic=Topic.objects.get(topic_name=request.POST['topic']))
     cmt.save()
     return redirect('/home/' + request.POST['topic'])
+
+
+def create_blog(request, topic):
+    footer = WebsiteDetail.objects.get(id=1)
+    if topic == 'new blog':
+        topic = Topic(topic_name='new blog')
+    else:
+        topic = Topic.objects.get(topic_name=topic)
+    context = {
+        'topic': topic,
+        'footer': footer
+    }
+    return render(request, 'create_blog.html', context)
+
+
+def add_blog(request):
+    if request.POST['topic'] == 'new blog':
+        topic = Topic()
+        topic.id = Topic.objects.all().count() + 1
+    else:
+        topic = Topic.objects.get(topic_name=request.POST['topic'])
+    topic.author = request.POST['author']
+    topic.topic_name = request.POST['topic_name']
+    topic.abstract_img = request.POST['abstract_img']
+    topic.abstract = request.POST['abstract']
+    topic.algorithm_type = request.POST['algorithm_type']
+    topic.upload_date = time.ctime()
+    topic.github = request.POST['github']
+    topic.content = request.POST['content']
+    topic.save()
+    return redirect('/home/create_blog/' + request.POST['topic_name'])
