@@ -54,6 +54,7 @@ class WebsiteDetail(models.Model):
     twitter = models.CharField(max_length=100)
     facebook = models.CharField(max_length=100)
     instagram = models.CharField(max_length=100)
+    contact = models.TextField(max_length=500, default='None')
 
     def __self__(self):
         return self.about
