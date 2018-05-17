@@ -51,6 +51,7 @@
 
         <nav id="main-nav-wrap">
              <ul class="main-navigation sf-menu">
+                    <li><h2 class="hi">Hi {{user}} !</h2></li>
                  <li><a href="{% url 'blg:home' %}" title="">Home</a></li>									
                  <li class="has-children">
                         <a href="#" title="">Blog</a>
@@ -59,7 +60,12 @@
                         </ul>
 					</li>
                  <li class="current"><a href="{% url 'blg:about' %}" title="">About</a></li>	
-                 <li><a href="{% url 'blg:contact' %}" title="">Contact</a></li>										
+                 <li><a href="{% url 'blg:contact' %}" title="">Contact</a></li>		
+                 {% if user %}
+                    <li><a href="{% url 'accounts:logout' %}">Log out</a></li>
+                    {% else %}
+                    <li><a href="{% url 'accounts:login' %}">Log in</a></li>
+                    {% endif %}								
              </ul>
          </nav> <!-- end main-nav-wrap -->
 

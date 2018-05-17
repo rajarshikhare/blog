@@ -47,11 +47,12 @@
 
    		<div class="logo">
 	         <a href="{% url 'blg:home' %}">Author</a>
-	      </div>
+          </div>
 
 	   	<nav id="main-nav-wrap">
 				<ul class="main-navigation sf-menu">
-					<li class="current"><a href="{% url 'blg:home' %}" title="">Home</a></li>									
+                    <li><h2 class="hi">Hi {{user}} !</h2></li>
+					<li class="current"><a href="{% url 'blg:home' %}" title="">Home</a></li>	
 					<li class="has-children">
                             <a href="#" title="">Blog</a>
                             <ul class="sub menu" style="display: none;">
@@ -59,7 +60,12 @@
                             </ul>
                         </li>
 					<li><a href="{% url 'blg:about' %}" title="">About</a></li>	
-					<li><a href="{% url 'blg:contact' %}" title="">Contact</a></li>										
+                    <li><a href="{% url 'blg:contact' %}" title="">Contact</a></li>
+                    {% if user %}
+                    <li><a href="{% url 'accounts:logout' %}">Log out</a></li>
+                    {% else %}
+                    <li><a href="{% url 'accounts:login' %}">Log in</a></li>
+                    {% endif %}						
 				</ul>
 			</nav> <!-- end main-nav-wrap -->
 
@@ -133,7 +139,7 @@
          	<article class="brick entry format-standard animate-this">
 
                <div class="entry-thumb">
-                  <a href="home/{{tpc.topic_name}}" class="thumb-link">
+                  <a href="{% url 'blg:blog_edu' topic=tpc.topic_name %}" class="thumb-link">
 	                  <img src="{{tpc.abstract_img}}" alt="building">             
                   </a>
                </div>

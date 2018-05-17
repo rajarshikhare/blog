@@ -50,7 +50,6 @@
 
         <nav id="main-nav-wrap">
              <ul class="main-navigation sf-menu">
-                    <li><h2 class="hi">Hi {{user}} !</h2></li>
                  <li><a href="{% url 'blg:home' %}" title="">Home</a></li>									
                  <li class="has-children">
                         <a href="#" title="">Blog</a>
@@ -59,10 +58,7 @@
                         </ul>
 					</li>
                  <li><a href="{% url 'blg:about' %}" title="">About</a></li>	
-                 <li><a href="{% url 'blg:contact' %}" title="">Contact</a></li>		
-                 {% if user %}
-                    <li><a href="{% url 'accounts:logout' %}">Log out</a></li>
-                    {% endif %}								
+                 <li><a href="{% url 'blg:contact' %}" title="">Contact</a></li>										
              </ul>
          </nav> <!-- end main-nav-wrap -->
 
@@ -99,44 +95,22 @@
    			<section>  
 
 					<div class="primary-content">
+                        <p class="lead">{{title}}</p>
 
-						<form name="cForm" id="cForm" method="post" action="{% url 'blg:add_blog' %}">
+						<form name="cForm" id="cForm" method="post" action="">
                                 {% csrf_token %}
 	  					   <fieldset>
-
-                        <input name="topic" type="hidden" value="{{topic.topic_name}}">
-                            <p class="lead">Topic Name</p>
-                        <div class="form-field">
-                                <input name="topic_name" type="text" id="cName" class="full-width" placeholder="Your Name" value="{{topic.topic_name}}">
-                         </div>
-                         <p class="lead">Abstract Image URL</p>
-	                     <div class="form-field">
-	  						      <input name="abstract_img" type="text" id="cEmail" class="full-width" placeholder="Your Email" value="{{topic.abstract_img}}">
-                         </div>
-                         <p class="lead">Abstract</p>
-                         <div class="message form-field">
-                                <textarea name="abstract" id="cMessage" class="full-width">{{topic.abstract}}</textarea>
-                         </div>
-                         <p class="lead">Type of Algorithm</p>
-                         <div class="form-field">
-                                <input name="algorithm_type" type="text" id="cEmail" class="full-width" placeholder="Your Email" value="{{topic.algorithm_type}}">
-                         </div>
-                         <p class="lead">Github</p>
-                         <div class="form-field">
-                                <input name="github" type="text" id="cEmail" class="full-width" placeholder="Your Email" value="{{topic.github}}">
-                         </div>
-                         <p class="lead">Content</p>
-	                     <div class="message form-field">
-	                        <textarea name="content" id="cMessage" class="full-width" style="height: 1000px">{{topic.content}}</textarea>
-	                     </div>
-
-	                     <button type="submit" class="submit button-primary full-width-on-mobile">Submit</button>
-
-	  					   </fieldset>
-  				      </form> <!-- end form -->
+                                {{form}}
+                                <button type="submit" class="submit button-primary full-width-on-mobile">Login</button>
+                             </fieldset>
+                        </form> <!-- end form -->
+                        {% if register %}
+                        <form name="cForm" id="cForm" action="{% url 'accounts:register' %}">
+                                <button type="submit" class="submit button-primary full-width-on-mobile">{{register}}</button>
+                        </form>
+                        {% endif %}
 
 				</section>
-   		
 
 			</div> <!-- end col-twelve -->
    	</div> <!-- end row -->		

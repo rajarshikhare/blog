@@ -1,11 +1,15 @@
-from django.http import HttpResponse, Http404
+import time
 from django.shortcuts import render, redirect
 from .models import Topic, Author, Comment, WebsiteDetail
-import time
 from .client import store_req
+from django.contrib.auth.decorators import login_required
 
 
 def home(request):
+    if request.user.is_authenticated:
+        user = Author.objects.get(user=request.user)
+    else:
+        user = ''
     store_req(request)
     topic = Topic.objects.all()
     footer = WebsiteDetail.objects.get(id=1)
@@ -15,13 +19,18 @@ def home(request):
         'topic': topic,
         'footer': footer,
         'pages': pages,
-        'current_page': current_page
+        'current_page': current_page,
+        'user':user
     }
     return render(request, 'index.html', context)
 
 
 def blog_edu(request, topic):
     # try:
+    if request.user.is_authenticated:
+        user = Author.objects.get(user=request.user)
+    else:
+        user = ''
     topic = Topic.objects.get(topic_name=topic)
     author = Author.objects.get(name=topic.author)
     comment = Comment.objects.filter(topic=topic)
@@ -42,25 +51,36 @@ def blog_edu(request, topic):
                'author': author,
                'footer': footer,
                'comment': comment,
-               'nav': {'next': next_, 'prev': prev_}
-               }
+               'nav': {'next': next_, 'prev': prev_},
+               'user':user
+              }
     return render(request, 'blog_page.html', context)
     # except:
     #    return render(request, 'pageNotFound.html')
 
 
 def about(request):
-    footer = WebsiteDetail.objects.get(id=1)
+    if request.user.is_authenticated:
+        user = Author.objects.get(user=request.user)
+    else:
+        user = ''
+    website = WebsiteDetail.objects.get(id=1)
     context = {
-        'footer': footer
+        'footer': website,
+        'user':user
     }
     return render(request, 'about.html', context)
 
 
 def contact(request):
+    if request.user.is_authenticated:
+        user = Author.objects.get(user=request.user)
+    else:
+        user = ''
     footer = WebsiteDetail.objects.get(id=1)
     context = {
-        'footer': footer
+        'footer': footer,
+        'user':user
     }
     return render(request, 'contact.html', context)
 
@@ -70,14 +90,19 @@ def blog(request):
     return render(request, 'pageNotFound.html')
 
 
-def comment(request):
+def add_comment(request):
     cmt = Comment(cmt=request.POST['cMessage'], writer_name=request.POST['cName'], time=time.ctime(
     ), email=request.POST['cEmail'], topic=Topic.objects.get(topic_name=request.POST['topic']))
     cmt.save()
     return redirect('/home/' + request.POST['topic'])
 
 
+@login_required(login_url='/accounts/login')
 def create_blog(request, topic):
+    if request.user.is_authenticated:
+        user = Author.objects.get(user=request.user)
+    else:
+        user = ''
     footer = WebsiteDetail.objects.get(id=1)
     if topic == 'new blog':
         topic = Topic(topic_name='new blog')
@@ -85,7 +110,8 @@ def create_blog(request, topic):
         topic = Topic.objects.get(topic_name=topic)
     context = {
         'topic': topic,
-        'footer': footer
+        'footer': footer,
+        'user':user
     }
     return render(request, 'create_blog.html', context)
 
@@ -96,7 +122,7 @@ def add_blog(request):
         topic.id = Topic.objects.all().count() + 1
     else:
         topic = Topic.objects.get(topic_name=request.POST['topic'])
-    topic.author = request.POST['author']
+    topic.author = Author.objects.get(user=request.user)
     topic.topic_name = request.POST['topic_name']
     topic.abstract_img = request.POST['abstract_img']
     topic.abstract = request.POST['abstract']

@@ -1,8 +1,9 @@
 from django.db import models
 import time
-
+from django.contrib.auth.models import User
 
 class Author(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
     facebook = models.CharField(max_length=300)
     twitter = models.CharField(max_length=300)
@@ -14,7 +15,7 @@ class Author(models.Model):
         return self.name
 
 class Topic(models.Model):
-    author = models.CharField(max_length=200, default='None')
+    author = models.ForeignKey(Author, on_delete=models.CASCADE)
     topic_name = models.CharField(max_length=200)
     abstract_img = models.CharField(max_length=200, default='None')
     abstract = models.CharField(max_length=1000, default='None')
@@ -55,6 +56,8 @@ class WebsiteDetail(models.Model):
     facebook = models.CharField(max_length=100)
     instagram = models.CharField(max_length=100)
     contact = models.TextField(max_length=500, default='None')
+    header = models.TextField(default='None')
+    footer = models.TextField(default='None')
 
     def __self__(self):
         return self.about
