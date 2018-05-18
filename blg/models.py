@@ -19,9 +19,9 @@ class Topic(models.Model):
     topic_name = models.CharField(max_length=200)
     abstract_img = models.CharField(max_length=200, default='None')
     abstract = models.CharField(max_length=1000, default='None')
-    algorithm_type = models.CharField(max_length=50, default='None')
+    category = models.CharField(max_length=50, default='None')
     upload_date = models.CharField(max_length=50, default=time.ctime())
-    github = models.CharField(max_length=200, default='None')
+    link = models.CharField(max_length=200, default='None')
     content = models.TextField(max_length=10000, default='None')
     
 

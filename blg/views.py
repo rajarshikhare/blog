@@ -126,9 +126,9 @@ def add_blog(request):
     topic.topic_name = request.POST['topic_name']
     topic.abstract_img = request.POST['abstract_img']
     topic.abstract = request.POST['abstract']
-    topic.algorithm_type = request.POST['algorithm_type']
+    topic.category = request.POST['category']
     topic.upload_date = time.ctime()
-    topic.github = request.POST['github']
+    topic.link = request.POST['link']
     topic.content = request.POST['content']
     topic.save()
     return redirect('/home/create_blog/' + request.POST['topic_name'])

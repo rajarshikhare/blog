@@ -352,8 +352,8 @@
 
 		if (typeof google === 'object' && typeof google.maps === 'object') {
 
-			var latitude = 14.549072,
-				 longitude = 121.046958,
+			var latitude = 20.2947,
+				 longitude = 85.7434,
 				 map_zoom = 15,		 
 				 main_color = '#d8ac00',
 				 saturation_value = -30,
