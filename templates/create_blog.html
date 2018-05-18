@@ -128,7 +128,10 @@
                          <p class="lead">Content</p>
 	                     <div class="message form-field">
 	                        <textarea name="content" id="cMessage" class="full-width" style="height: 1000px">{{topic.content}}</textarea>
-	                     </div>
+                         </div>
+                         
+                        <input name="is_private" type="checkbox" {% if topic.is_private %} checked {% endif %}>   Private<br>
+                         
 
 	                     <button type="submit" class="submit button-primary full-width-on-mobile">Submit</button>
 

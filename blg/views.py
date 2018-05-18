@@ -3,15 +3,17 @@ from django.shortcuts import render, redirect
 from .models import Topic, Author, Comment, WebsiteDetail
 from .client import store_req
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 
 
 def home(request):
     if request.user.is_authenticated:
         user = Author.objects.get(user=request.user)
+        topic = Topic.objects.exclude(Q(is_private=True) & ~Q(author=user))
     else:
         user = ''
+        topic = Topic.objects.exclude(is_private=True)
     store_req(request)
-    topic = Topic.objects.all()
     footer = WebsiteDetail.objects.get(id=1)
     pages = list(range(1, topic.count()//5 + 2))
     current_page = 1
@@ -133,8 +135,9 @@ def add_blog(request):
     topic.upload_date = time.ctime()
     topic.link = request.POST['link']
     topic.content = request.POST['content']
+    topic.is_private = True if request.POST.get('is_private', False) else False
     topic.save()
-    return redirect('/home/create_blog/' + request.POST['topic_name'])
+    return redirect('/home/create_blog/' + topic.topic_name)
 
 
 def error(request):

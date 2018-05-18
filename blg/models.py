@@ -23,6 +23,7 @@ class Topic(models.Model):
     upload_date = models.CharField(max_length=50, default=time.ctime())
     link = models.CharField(max_length=200, default='None')
     content = models.TextField(max_length=10000, default='None')
+    is_private = models.BooleanField(default=False)
     
 
     def __str__(self):
