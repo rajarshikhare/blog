@@ -121,11 +121,12 @@ def create_blog(request, topic):
 def add_blog(request):
     if request.POST['topic'] == 'new blog':
         topic = Topic()
+        topic.topic_name = request.POST['topic_name'] + '.'
         topic.id = Topic.objects.all().count() + 1
     else:
         topic = Topic.objects.get(topic_name=request.POST['topic'])
+        topic.topic_name = request.POST['topic_name']
     topic.author = Author.objects.get(user=request.user)
-    topic.topic_name = request.POST['topic_name']
     topic.abstract_img = request.POST['abstract_img']
     topic.abstract = request.POST['abstract']
     topic.category = request.POST['category']
