@@ -99,7 +99,6 @@ def add_comment(request):
 
 @login_required(login_url='/accounts/login')
 def create_blog(request, topic):
-    print(topic)
     if request.user.is_authenticated:
         user = Author.objects.get(user=request.user)
     else:
@@ -109,6 +108,8 @@ def create_blog(request, topic):
         topic = Topic(topic_name='new blog')
     else:
         topic = Topic.objects.get(topic_name=topic)
+        if topic.author != user:
+            return redirect('/home/error')
     context = {
         'topic': topic,
         'footer': footer,
@@ -133,3 +134,7 @@ def add_blog(request):
     topic.content = request.POST['content']
     topic.save()
     return redirect('/home/create_blog/' + request.POST['topic_name'])
+
+
+def error(request):
+    return render(request, 'error.html', {'error':'OOPS!! YOU CAN EDIT ONLY YOUR OWN BLOGS..'})
