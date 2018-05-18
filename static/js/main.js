@@ -349,7 +349,6 @@
   /* Map
 	* ------------------------------------------------------ */
 	var ssGoogleMap = function() { 
-
 		if (typeof google === 'object' && typeof google.maps === 'object') {
 
 			var latitude = 20.2947,
