@@ -211,13 +211,21 @@
                         {% csrf_token %}
   					   <fieldset>
 
+                    {% if not user %}
                      <div class="form-field">
   						      <input name="cName" type="text" id="cName" class="full-width" placeholder="Your Name" value="">
                      </div>
-
                      <div class="form-field">
   						      <input name="cEmail" type="text" id="cEmail" class="full-width" placeholder="Your Email" value="">
                      </div>
+                     {% else %}
+                     <div class="form-field">
+                            <input name="cName" type="hidden" id="cName" class="full-width" placeholder="Your Name" value="{{user.name}}">
+                    </div>
+                    <div class="form-field">
+                                <input name="cEmail" type="hidden" id="cEmail" class="full-width" placeholder="Your Email" value="{{user.email}}">
+                    </div>
+                     {% endif %}
 
                      <input type="hidden" name=topic value="{{topic.topic_name}}"> 
 

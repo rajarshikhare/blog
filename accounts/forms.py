@@ -32,7 +32,6 @@ class UserRegisterForm(forms.ModelForm):
     facebook = forms.CharField(max_length=300)
     twitter = forms.CharField(max_length=300)
     instagram = forms.CharField(max_length=300)
-    img_url = forms.CharField(max_length=1000)
     about = forms.CharField(widget=forms.Textarea, max_length=500)
     class Meta:
         model = User

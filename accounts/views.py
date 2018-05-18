@@ -49,6 +49,7 @@ def register_view(request):
         author.instagram = form.cleaned_data.get('instagram')
         author.twitter = form.cleaned_data.get('twitter')
         author.about = form.cleaned_data.get('about')
+        author.email = form.cleaned_data.get('email')
         author.save()
 
         new_user = authenticate(username=user.username, password=password)

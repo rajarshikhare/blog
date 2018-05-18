@@ -52,7 +52,7 @@ def blog_edu(request, topic):
                'footer': footer,
                'comment': comment,
                'nav': {'next': next_, 'prev': prev_},
-               'user':user
+               'user':user,
               }
     return render(request, 'blog_page.html', context)
     # except:

@@ -8,7 +8,7 @@ class Author(models.Model):
     facebook = models.CharField(max_length=300)
     twitter = models.CharField(max_length=300)
     instagram = models.CharField(max_length=300)
-    img_url = models.CharField(max_length=1000, default='None')
+    email = models.CharField(max_length=1000, default='None')
     about = models.TextField(max_length=2000, default='Not given by the author but obviously he/she must be awesome!!s')
 
     def __str__(self):
