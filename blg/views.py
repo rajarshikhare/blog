@@ -99,6 +99,7 @@ def add_comment(request):
 
 @login_required(login_url='/accounts/login')
 def create_blog(request, topic):
+    print(topic)
     if request.user.is_authenticated:
         user = Author.objects.get(user=request.user)
     else:
