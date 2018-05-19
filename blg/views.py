@@ -4,6 +4,7 @@ from .models import Topic, Author, Comment, WebsiteDetail
 from .client import store_req
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+import _thread
 
 
 def home(request):
@@ -13,7 +14,8 @@ def home(request):
     else:
         user = ''
         topic = Topic.objects.exclude(is_private=True)
-    store_req(request)
+    #store_req(request)
+    _thread.start_new_thread(store_req, (request,))
     footer = WebsiteDetail.objects.get(id=1)
     pages = list(range(1, topic.count()//5 + 2))
     current_page = 1
@@ -37,7 +39,7 @@ def blog_edu(request, topic):
 
     if topic.is_private and (user != topic.author):
         return error(request, 'view_not_allowed')
-        
+
     author = Author.objects.get(name=topic.author)
     comment = Comment.objects.filter(topic=topic)
     next_ = topic.id + 1
