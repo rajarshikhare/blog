@@ -29,11 +29,14 @@ def home(request):
 
 def blog_edu(request, topic):
     # try:
+    topic = Topic.objects.get(topic_name=topic)
     if request.user.is_authenticated:
         user = Author.objects.get(user=request.user)
     else:
         user = ''
-    topic = Topic.objects.get(topic_name=topic)
+
+    if topic.is_private and (user != topic.author):
+        return error(request, 'view_not_allowed')
     author = Author.objects.get(name=topic.author)
     comment = Comment.objects.filter(topic=topic)
     next_ = topic.id + 1
@@ -111,7 +114,9 @@ def create_blog(request, topic):
     else:
         topic = Topic.objects.get(topic_name=topic)
         if topic.author != user:
-            return redirect('/home/error')
+            #return redirect('/home/error')
+            return error(request, 'edit_not_allowed')
+            
     context = {
         'topic': topic,
         'footer': footer,
@@ -140,5 +145,9 @@ def add_blog(request):
     return redirect('/home/create_blog/' + topic.topic_name)
 
 
-def error(request):
-    return render(request, 'error.html', {'error':'OOPS!! YOU CAN EDIT ONLY YOUR OWN BLOGS..'})
+def error(request, msg):
+    error_message = {
+    'edit_not_allowed':'OOPS!! YOU CAN EDIT ONLY YOUR OWN BLOGS..',
+    'view_not_allowed':'OOPS!! THE AUTHOR MADE THIS PRIVATE BLOG. YOU ARE NOT ALLOWED TO VIEW THIS BLOG.'
+    }
+    return render(request, 'error.html', {'error':error_message[msg]})
