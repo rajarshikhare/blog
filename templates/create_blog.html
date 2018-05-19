@@ -241,6 +241,30 @@
    <script src="{% static "js/jquery-2.1.3.min.js" %}"></script>
    <script src="{% static "js/plugins.js" %}"></script>
    <script src="{% static "js/main.js" %}"></script>  
+   <script>
+       //script ot accept tab in textarea
+        $("textarea").keydown(function(e) {
+        if(e.keyCode === 9) { // tab was pressed
+            // get caret position/selection
+            var start = this.selectionStart;
+            var end = this.selectionEnd;
+
+            var $this = $(this);
+            var value = $this.val();
+
+            // set textarea value to: text before caret + tab + text after caret
+            $this.val(value.substring(0, start)
+                        + "\t"
+                        + value.substring(end));
+
+            // put caret at right position again (add one for the tab)
+            this.selectionStart = this.selectionEnd = start + 1;
+
+            // prevent the focus lose
+            e.preventDefault();
+        }
+    });
+    </script>
 
 </body>
 
