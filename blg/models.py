@@ -48,7 +48,7 @@ class Client(models.Model):
     isp = models.CharField(max_length=100, default='None')
 
     def __str__(self):
-        return self.city + ' - ' + self.country  + ' - ' + self.isp
+        return self.city + ' - ' + self.country  + ' - ' + self.isp + ' - ' + self.ip_address
 
 
 class WebsiteDetail(models.Model):
