@@ -37,6 +37,7 @@ def blog_edu(request, topic):
 
     if topic.is_private and (user != topic.author):
         return error(request, 'view_not_allowed')
+        
     author = Author.objects.get(name=topic.author)
     comment = Comment.objects.filter(topic=topic)
     next_ = topic.id + 1
