@@ -33,6 +33,9 @@ def get_location(ip):
 
 def send_mail(city, country, isp):
 
+    if city == 'Mumbai' or city == 'Thane':
+        return
+
     html_part = '<h3>' + 'CITY : ' + city + '<br>COUNTRY: ' + country + '<br>ISP: ' + isp + '</h3>' 
     api_key = '1b0caf4efe008cfec2c383f9c416ba34'
     api_secret = 'cab5f6da8cf628ac848edf7f60f3d70d'
