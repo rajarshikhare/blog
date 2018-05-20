@@ -5,3 +5,6 @@ def start(request):
 
 def google(request):
     return render(request, 'google3b2ce12912f0a3e6.html')
+
+def sitemap(request):
+    return render(request, 'sitemap.xml')
