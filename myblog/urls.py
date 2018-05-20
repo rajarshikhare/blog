@@ -22,4 +22,5 @@ urlpatterns = [
     path('home/', include('blg.urls')),
     path('accounts/', include('accounts.urls')),
     path('admin/', admin.site.urls),
+    path('google3b2ce12912f0a3e6.html', views.google)
 ]
