@@ -558,11 +558,12 @@ input[type="password"],
 textarea,
 select {
 	display: block;
-	height: 6rem;
+    height: 6rem;
+    width: 70%;
 	padding: 1.5rem 2.5rem;
 	border: 0;
 	outline: none;
-	vertical-align: middle;
+    vertical-align: middle;
 	color: rgba(0, 0, 0, 0.7);
 	font-family: "roboto-regular", sans-serif;
 	font-size: 1.5rem;
