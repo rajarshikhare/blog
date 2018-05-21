@@ -3031,11 +3031,11 @@ html[xmlns] .flexslider .slides {
   width: 100px;
   height: 100px;
   margin: -50px 0 0 -50px;
-  background: url(bigplay.svg) no-repeat;
+  background: url() no-repeat;
 }
 
 .no-svg .mejs-overlay-button {
-  background-image: url(bigplay.png);
+  background-image: url();
 }
 
 .mejs-overlay:hover .mejs-overlay-button {
