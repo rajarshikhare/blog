@@ -3064,7 +3064,7 @@ html[xmlns] .flexslider .slides {
   display: block;
   width: 80px;
   height: 80px;
-  background: transparent url(loading.gif) 50% 50% no-repeat;
+  background: transparent url() 50% 50% no-repeat;
 }
 
 /* End: LAYERS */
