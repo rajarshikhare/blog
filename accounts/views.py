@@ -6,7 +6,7 @@ from django.contrib.auth import (
 )
 from django.shortcuts import render
 from django.shortcuts import redirect
-from .forms import UserLoginForm, UserRegisterForm
+from .forms import UserLoginForm, UserRegisterForm, ProfileForm
 from blg.models import Author
 
 def start(request):
@@ -29,6 +29,7 @@ def login_view(request):
         'form':form,
         'title':'Login',
         'register':'Register',
+        'button_text':'Login'
     }
 
     return render(request, "form.html", context)
@@ -60,7 +61,8 @@ def register_view(request):
 
     context = {
         'form':form,
-        'title':title
+        'title':title,
+        'button_text':'Register'
     }
 
     return render(request, 'form.html', context)
@@ -69,3 +71,31 @@ def logout_view(request):
     logout(request)
     return redirect('/home')
 
+def profile_view(request):
+    title = 'Update'
+    form = ProfileForm(request.POST or None)
+
+    if form.is_valid():
+        author = Author.objects.get(user=request.user)
+        author.name = form.cleaned_data.get('name')
+        author.facebook = form.cleaned_data.get('facebook')
+        author.instagram = form.cleaned_data.get('instagram')
+        author.twitter = form.cleaned_data.get('twitter')
+        author.about = form.cleaned_data.get('about')
+        author.email = form.cleaned_data.get('email')
+        author.save()
+    
+    if request.user.is_authenticated:
+        author = Author.objects.get(user=request.user)
+        form = ProfileForm(initial={'name':author.name,'email':author.email, 'about':author.about, 'facebook':author.facebook, 'twitter':author.twitter, 'instagram':author.instagram})
+
+    context = {
+        'form':form,
+        'title':title,
+        'button_text':'Update'
+    }
+
+
+    return render(request, 'form.html', context)
+
+    

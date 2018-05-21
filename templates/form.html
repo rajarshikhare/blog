@@ -101,7 +101,7 @@
                                 {% csrf_token %}
 	  					   <fieldset>
                                 {{form}}
-                                <button type="submit" class="submit button-primary full-width-on-mobile">Login</button>
+                                <button type="submit" class="submit button-primary full-width-on-mobile">{{button_text}}</button>
                              </fieldset>
                         </form> <!-- end form -->
                         {% if register %}
@@ -211,7 +211,6 @@
    ================================================== --> 
    <script src="{% static "js/jquery-2.1.3.min.js" %}"></script>
    <script src="{% static "js/plugins.js" %}"></script>
-   <script src="{% static "http://maps.google.com/maps/api/js?v=3.13&amp;sensor=false" %}"></script>
    <script src="{% static "js/main.js" %}"></script>  
 
 </body>

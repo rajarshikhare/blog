@@ -54,3 +54,22 @@ class UserRegisterForm(forms.ModelForm):
             raise forms.ValidationError('Both password should match')
 
         return password2
+
+
+class ProfileForm(forms.Form):
+    name = forms.CharField(max_length=200)
+    facebook = forms.CharField(max_length=300)
+    twitter = forms.CharField(max_length=300)
+    instagram = forms.CharField(max_length=300)
+    about = forms.CharField(widget=forms.Textarea, max_length=500)
+    email = forms.EmailField()
+    class Meta:
+        fields = [
+            'name',
+            'email',
+            'about',
+            'facebook',
+            'twitter',
+            'instagram',
+        ]
+

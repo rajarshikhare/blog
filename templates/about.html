@@ -51,7 +51,7 @@
 
         <nav id="main-nav-wrap">
              <ul class="main-navigation sf-menu">
-                    <li><h2 class="hi">Hi {{user}} !</h2></li>
+                    <li><h2><a href="{% url 'accounts:profile' %}">Hi {{user}} !</a></h2></li>
                  <li><a href="{% url 'blg:home' %}" title="">Home</a></li>									
                  <li class="has-children">
                         <a href="#" title="">Blog</a>
