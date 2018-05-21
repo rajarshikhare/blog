@@ -13,5 +13,6 @@ urlpatterns = [
     path('add_blog', views.add_blog, name='add_blog'),
     path('error', views.error, name='error'),
     #/ is added because of anomaly in loading home page but i removed it because of hroku error
-    path('<topic>/', views.blog_edu, name='blog_edu')
+    path('<topic>/', views.blog_edu, name='blog_edu'),
+    path('sample', views.sample, name='sample')
 ]

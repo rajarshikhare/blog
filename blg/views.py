@@ -154,3 +154,8 @@ def error(request, msg):
     'view_not_allowed':'OOPS!! THE AUTHOR MADE THIS PRIVATE BLOG. YOU ARE NOT ALLOWED TO VIEW THIS BLOG.'
     }
     return render(request, 'error.html', {'error':error_message[msg]})
+
+
+def sample(request):
+    footer = WebsiteDetail.objects.get(id=1)
+    return render(request, 'sample.html',  {'footer' : footer})

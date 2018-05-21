@@ -16,7 +16,7 @@ def get_client_ip(request):
 def store_req(request):
     ip_addr = get_client_ip(request)
     city, country, isp = get_location(ip_addr)
-    send_mail(city, country, isp)
+    #send_mail(city, country, isp)
     c = Client(user_agent=request.META['HTTP_USER_AGENT'], ip_address=ip_addr, time=time.ctime(), city=city, country=country, isp=isp)
     c.save()
 
@@ -60,6 +60,4 @@ def send_mail(city, country, isp):
         ]
     }
     result = mailjet.send.create(data=data)
-    print(result.status_code)
-    print(result.json())
         
