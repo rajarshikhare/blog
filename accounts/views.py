@@ -8,6 +8,7 @@ from django.shortcuts import render
 from django.shortcuts import redirect
 from .forms import UserLoginForm, UserRegisterForm, ProfileForm
 from blg.models import Author
+from django.contrib.auth.decorators import login_required
 
 def start(request):
     return redirect('login/')
@@ -71,6 +72,8 @@ def logout_view(request):
     logout(request)
     return redirect('/home')
 
+
+@login_required(login_url='/accounts/login')
 def profile_view(request):
     title = 'Update'
     form = ProfileForm(request.POST or None)
