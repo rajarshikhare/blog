@@ -153,5 +153,5 @@ EMAIL_HOST='in-v3.mailjet.com'
 EMAIL_PORT=25
 EMAIL_HOST_USER='1b0caf4efe008cfec2c383f9c416ba34'
 EMAIL_HOST_PASSWORD='cab5f6da8cf628ac848edf7f60f3d70d'
-SERVER_EMAIL='rvkblogBot@rvkblog.com'
+SERVER_EMAIL='rvkblogBot@gmail.com'
 ADMINS=( ('admin', 'rajarshi.vaibhav@gmai.com'),)
