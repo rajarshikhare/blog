@@ -93,10 +93,6 @@ def contact(request):
     return render(request, 'contact.html', context)
 
 
-def blog(request):
-    footer = WebsiteDetail.objects.get(id=1)
-    return render(request, 'pageNotFound.html')
-
 
 def add_comment(request):
     cmt = Comment(cmt=request.POST['cMessage'], writer_name=request.POST['cName'], time=time.ctime(
