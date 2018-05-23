@@ -59,6 +59,7 @@ class WebsiteDetail(models.Model):
     contact = models.TextField(max_length=500, default='None')
     header = models.TextField(default='None')
     footer = models.TextField(default='None')
+    sitemap = models.TextField(max_length=10000, default='None')
 
     def __self__(self):
         return self.about
