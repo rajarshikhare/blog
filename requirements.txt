@@ -1,4 +1,4 @@
-Django==2.0.4
+Django==2.0.12
 numpy==1.14.0
 gunicorn==19.8.1
 whitenoise==3.3.1
